@@ -3,11 +3,10 @@ stage('Instalar paquete en EC2') {
         script {
             def targetHost = input(
                 message: 'Ingresa el nombre o IP de la instancia EC2:',
-                parameters: [string(name: 'targetHost', defaultValue: '')]
+                parameters: [string(name: 'targetHost', defaultValue: '44.215.121.231')]
             )
 
-            sh "ansible-playbook -i '${44.215.121.231},' playbooks/install_app.yml -e 'target_host=${44.215.121.231}'"
+            sh "ansible-playbook -i '${targetHost},' playbooks/install_app.yml -e 'target_host=${targetHost}'"
         }
     }
 }
-
