@@ -2,7 +2,7 @@ stage('Instalar paquete en EC2') {
     steps {
         script {
             def targetHost = input(
-                message: 'Ingresa el nombre o IP de la instancia EC2:',
+                message: 'Lab IaC: 44.215.121.231',
                 parameters: [string(name: 'targetHost', defaultValue: '44.215.121.231')]
             )
 
