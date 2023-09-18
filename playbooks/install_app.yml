@@ -1,15 +1,28 @@
 ---
-- name: Instalar paquete en EC2
-  hosts: "{{ 44.215.121.231 }}"
+- name: Conectar a servidor EC2 y realizar tareas de Jenkins
+  hosts: "44.215.121.231" 
+  gather_facts: yes
+
   tasks:
-    - name: Actualizar caché de apt (para sistemas basados en Debian)
+    - name: Instalar el cliente de Jenkins
       apt:
+        name: jenkins-cli
         update_cache: yes
       become: yes
 
-    - name: Instalar paquete
-      apt:
-        name: test
-        state: present  
+    - name: Descargar la línea de comandos de Jenkins
+      shell: |
+        wget http://localhost:8080/jnlpJars/jenkins-cli.jar
+        chmod +x jenkins-cli.jar
+      args:
+        executable: /bin/bash
       become: yes
-      
+      become_user: admin  
+
+    - name: Crear un job de ejemplo en Jenkins
+      shell: |
+        java -jar jenkins-cli.jar -s http://localhost:8080/ create-job MiPrimerJob < config.xml
+      args:
+        executable: /bin/bash
+      become: yes
+      become_user: admin  
