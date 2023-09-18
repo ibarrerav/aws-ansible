@@ -9,7 +9,7 @@ pipeline {
                         message: 'Lab IaC: 44.215.121.231',
                         parameters: [string(name: 'targetHost', defaultValue: '44.215.121.231')]
                     )
-                    sh "/usr/local/bin/ansible-playbook -i '${targetHost},' playbooks/install_app.yml -e 'target_host=${targetHost}'"
+                    sh "/usr/local/bin/ansible-playbook -i '${targetHost},' playbooks/install_app.yml -e 'target_host=${targetHost},' ConnectTimeout=60 usuario@44.215.121.231"
                 }
             }
         }
