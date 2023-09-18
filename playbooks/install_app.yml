@@ -1,0 +1,15 @@
+---
+- name: Instalar paquete en EC2
+  hosts: "{{ 44.215.121.231 }}"
+  tasks:
+    - name: Actualizar caché de apt (para sistemas basados en Debian)
+      apt:
+        update_cache: yes
+      become: yes
+
+    - name: Instalar paquete
+      apt:
+        name: test
+        state: present  
+      become: yes
+      
