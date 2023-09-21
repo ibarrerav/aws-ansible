@@ -2,6 +2,7 @@
 - name: Conectar a servidor EC2 y realizar tareas de Jenkins
   hosts: "all"
   gather_facts: yes
+  ignore_unreachable: true
 
   tasks:
     - name: Instalar el cliente de Jenkins
