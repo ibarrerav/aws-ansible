@@ -27,3 +27,4 @@
         executable: /bin/bash
       become: yes
       become_user: admin  
+      ignore_unreachable: false
