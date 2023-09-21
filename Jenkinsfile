@@ -7,7 +7,7 @@ pipeline {
                 script {
                     def targetHost = input(
                         message: 'Lab IaC:Ingrese su instancia',
-                        parameters: [string(name: 'targetHost', defaultValue: '172.31.3.212')]
+                        parameters: [string(name: 'targetHost', defaultValue: '172.31.0.1')]
                     )
                     sh "/usr/local/bin/ansible-playbook -i '${targetHost},' playbooks/install_app.yml -e 'target_host=${targetHost}'"
                 }
