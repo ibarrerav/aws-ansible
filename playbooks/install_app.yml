@@ -1,6 +1,6 @@
 ---
 - name: Conectar a servidor EC2 y realizar tareas de Jenkins
-  hosts: "all"
+  hosts: "LabIaC"
   gather_facts: yes
 
   tasks:
