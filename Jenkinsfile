@@ -9,8 +9,8 @@ pipeline {
                         message: 'Lab IaC:Ingrese su instancia',
                         parameters: [string(name: 'targetHost', defaultValue: 'all')]
                     )
-                    //sh "/usr/local/bin/ansible-playbook -i '${targetHost},' playbooks/install_app.yml -e 'target_host=${targetHost}'"
-                    sh "/usr/local/bin/ansible-playbook -i '${targetHost}' playbooks/install_app.yml"
+                    sh "/usr/local/bin/ansible-playbook -i '${targetHost},' playbooks/install_app.yml -e 'target_host=${targetHost}'"
+                    //sh "/usr/local/bin/ansible-playbook -i '${targetHost}' playbooks/install_app.yml"
 
                 }
             }
