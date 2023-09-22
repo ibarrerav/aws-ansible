@@ -17,19 +17,12 @@ pipeline {
 
         stage('Deploy to EC2') {
             steps {
-            script {
-                // Copia tu clave SSH privada a una ubicación segura
-                sh 'echo "$SSH_PRIVATE_KEY" > ~/.ssh/id_rsa'
-                sh 'chmod 600 ~/.ssh/id_rsa'
-
-                // Instala Ansible si no está instalado
-                if ! command -v ansible &> /dev/null
-                then
-                    sh 'pip install ansible'
-                fi
-
-                // Ejecuta el playbook de Ansible
-                sh 'ansible-playbook -i inventory.ini -u tu_usuario --private-key=~/.ssh/id_rsa miplaybook.yml'
+                script {
+                    // Copia tu clave SSH privada a una ubicación segura
+                    sh 'echo "$SSH_PRIVATE_KEY" > ~/.ssh/id_rsa'
+                    sh 'chmod 600 ~/.ssh/id_rsa'
+                    // Ejecuta el playbook de Ansible
+                    sh 'ansible-playbook -i inventory.ini -u tu_usuario --private-key=~/.ssh/id_rsa miplaybook.yml'
                 }
             }
         }
