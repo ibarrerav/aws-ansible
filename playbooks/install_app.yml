@@ -2,27 +2,21 @@
 - name: Conectar a servidor EC2 y realizar tareas de Jenkins
   hosts: "all"
   gather_facts: yes
-
+  become: yes
+  
   tasks:
-    - name: Instalar el cliente de Jenkins
-      apt:
-        name: jenkins-cli
-        update_cache: yes
-      become: yes
-
-    - name: Descargar la línea de comandos de Jenkins
-      shell: |
-        wget http://localhost:8080/jnlpJars/jenkins-cli.jar
-        chmod +x jenkins-cli.jar
-      args:
-        executable: /bin/bash
-      become: yes
-      become_user: admin  
-
-    - name: Crear un job de ejemplo en Jenkins
-      shell: |
-        java -jar jenkins-cli.jar -s http://localhost:8080/ create-job MiPrimerJob < config.xml
-      args:
-        executable: /bin/bash
-      become: yes
-      become_user: admin
+    - name: Actualizar paquetes
+      package:
+        name: "{{ item }}"
+        state: latest
+      loop:
+        - python3
+        - python3-pip
+        - nodejs
+        - npm
+        - java-11-openjdk
+        - ruby
+      when: (ansible_facts['distribution'] == 'Ubuntu' and ansible_facts['distribution_version'] | version_compare('16.04', '>='))
+            or (ansible_facts['distribution'] == 'Debian' and ansible_facts['distribution_version'] | version_compare('9', '>='))
+            or (ansible_facts['distribution'] == 'CentOS' and ansible_facts['distribution_major_version'] == '7')
+            or (ansible_facts['distribution'] == 'RedHat' and ansible_facts['distribution_major_version'] == '7')
