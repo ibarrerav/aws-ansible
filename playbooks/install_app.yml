@@ -3,20 +3,15 @@
   hosts: "all"
   gather_facts: yes
   become: yes
-  
+
   tasks:
-    - name: Actualizar paquetes
+   - name: Actualizar paquetes
       package:
-        name: "{{ item }}"
+        name:
+          - python3
+          - python3-pip
+          - nodejs
+          - npm
+          - java-11-openjdk
+          - ruby
         state: latest
-      loop:
-        - python3
-        - python3-pip
-        - nodejs
-        - npm
-        - java-11-openjdk
-        - ruby
-      when: (ansible_facts['distribution'] == 'Ubuntu' and ansible_facts['distribution_version'] | version_compare('16.04', '>='))
-            or (ansible_facts['distribution'] == 'Debian' and ansible_facts['distribution_version'] | version_compare('9', '>='))
-            or (ansible_facts['distribution'] == 'CentOS' and ansible_facts['distribution_major_version'] == '7')
-            or (ansible_facts['distribution'] == 'RedHat' and ansible_facts['distribution_major_version'] == '7')
