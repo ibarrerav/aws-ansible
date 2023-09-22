@@ -9,7 +9,7 @@ pipeline {
                     sh 'echo "$SSH_PRIVATE_KEY" > ~/.ssh/id_rsa'
                     sh 'chmod 600 ~/.ssh/id_rsa'
                     // Ejecuta el playbook de Ansible
-                    sh '/usr/local/bin/ansible-playbook -i inventory.ini -u tu_usuario --private-key=~/.ssh/id_rsa miplaybook.yml'
+                    sh '/usr/local/bin/ansible-playbook -i inventory.ini -u tu_usuario --private-key=~/.ssh/id_rsa playbooks/install_app.yml'
                 }
             }
         }
