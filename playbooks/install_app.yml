@@ -1,6 +1,6 @@
 ---
 - name: Conectar a servidor EC2 y realizar tareas de Jenkins
-  hosts: "54.241.93.211"
+  hosts: "52.53.192.14"
   gather_facts: yes
 
   tasks:
