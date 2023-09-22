@@ -9,7 +9,7 @@ pipeline {
                         message: 'Lab IaC:Ingrese su instancia',
                         parameters: [string(name: 'targetHost', defaultValue: '54.241.93.211')]
                     )
-                    sh "/usr/local/bin/ansible-playbook -i '${targetHost},' playbooks/install_app.yml -e 'target_host=${targetHost}'"
+                    sh "/usr/local/bin/ansible-playbook -i '${targetHost},'Downloads/terraform.pem playbooks/install_app.yml -e 'target_host=${targetHost}'"
                 }
             }
         }
