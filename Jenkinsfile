@@ -2,18 +2,6 @@ pipeline {
     agent any
 
     stages {
-                stage('Deploy to EC2') {
-            steps {
-                script {
-                    // Copia tu clave SSH privada a una ubicación segura
-                    sh 'echo "$SSH_PRIVATE_KEY" > ~/.ssh/id_rsa'
-                    sh 'chmod 600 ~/.ssh/id_rsa'
-                    // Ejecuta el playbook de Ansible
-                    sh '/usr/local/bin/ansible-playbook -i inventory.ini -u tu_usuario --private-key=~/.ssh/id_rsa playbooks/install_app.yml'
-                }
-            }
-        }
-
         stage('Instalar paquete en EC2') {
             steps {
                 script {
@@ -22,11 +10,8 @@ pipeline {
                         parameters: [string(name: 'targetHost', defaultValue: '44.215.121.231')]
                     )
                     sh "/usr/local/bin/ansible-playbook -i '${targetHost},' playbooks/install_app.yml -e 'target_host=${targetHost}'"
-
                 }
             }
         }
-
-
     }
 }
