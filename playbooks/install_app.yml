@@ -8,10 +8,10 @@
     - name: Actualizar paquetes
       package:
         name:
-          - python3
-          - python3-pip
+          #- python3
+          #- python3-pip
           #- nodejs
-          #- npm
+          - npm
           #- java-11-openjdk
           #- ruby
         state: latest
