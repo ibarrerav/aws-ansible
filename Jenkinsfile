@@ -5,6 +5,7 @@ pipeline {
         stage('Ejecutar SSH') {
             steps {
                 script {
+                    sh "chmod 400 downloads/terraform.pem"
                     def SSH_KEY = input(
                         message: 'Lab IaC:Ingrese la ruta del doc .pem',
                         parameters: [string(name: 'SSH_KEY', defaultValue: '')]
