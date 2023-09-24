@@ -2,7 +2,8 @@ pipeline {
     agent any
 
     stages {
-        stage('Ejecutar SSH') {
+        /*
+        stage('Ejecutar SSH validar y permitir conexion a nuevo host') {
             steps {
                 script {
                     sh "chmod 400 Users/isaacbarrera/Downloads/terraform.pem"
@@ -18,7 +19,7 @@ pipeline {
                 }
             }
         }
-
+        */
         stage('Instalar paquete en EC2') {
             steps {
                 script {
