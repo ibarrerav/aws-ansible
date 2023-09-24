@@ -5,11 +5,11 @@ pipeline {
         stage('Ejecutar SSH') {
             steps {
                 script {
-                    def PEM = input(
+                    def SSH_KEY = input(
                         message: 'Lab IaC:Ingrese la ruta del doc .pem',
                         parameters: [string(name: 'SSH_KEY', defaultValue: '')]
                     )
-                    def IP = input(
+                    def IP_ADDRESS = input(
                         message: 'Lab IaC:Ingrese el ip de la instancia',
                         parameters: [string(name: 'IP_ADDRESS', defaultValue: '')]
                     )
