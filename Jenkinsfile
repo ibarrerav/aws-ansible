@@ -2,17 +2,17 @@ pipeline {
     agent any
 
     stages {
-        def PEM = input(
-            message: 'Lab IaC:Ingrese la ruta del doc .pem',
-            parameters: [string(name: 'SSH_KEY', defaultValue: '')]
-        )
-        def IP = input(
-            message: 'Lab IaC:Ingrese el ip de la instancia',
-            parameters: [string(name: 'IP_ADDRESS', defaultValue: '')]
-        )
         stage('Ejecutar SSH') {
             steps {
                 script {
+                    def PEM = input(
+                        message: 'Lab IaC:Ingrese la ruta del doc .pem',
+                        parameters: [string(name: 'SSH_KEY', defaultValue: '')]
+                    )
+                    def IP = input(
+                        message: 'Lab IaC:Ingrese el ip de la instancia',
+                        parameters: [string(name: 'IP_ADDRESS', defaultValue: '')]
+                    )
                     sh "ssh -i $SSH_KEY ec2-user@$IP_ADDRESS"
                 }
             }
