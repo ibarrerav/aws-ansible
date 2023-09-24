@@ -13,7 +13,7 @@ pipeline {
                         message: 'Lab IaC:Ingrese el ip de la instancia',
                         parameters: [string(name: 'IP_ADDRESS', defaultValue: '')]
                     )
-                    sh "ssh -i $SSH_KEY ec2-user@$IP_ADDRESS"
+                    sh "ssh -i '${SSH_KEY}' ec2-user@'${IP_ADDRESS}'"
                 }
             }
         }
