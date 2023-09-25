@@ -5,13 +5,18 @@
   become: yes
 
   tasks:
+    - name: Imprimir Hola Mundo
+      command: echo "Hola Mundo"
+
+  tasks:
     - name: Actualizar paquetes
       package:
         name:
           #- python3
           #- python3-pip
           #- nodejs
-          - npm
+          #- npm
           #- java-11-openjdk
           #- ruby
         state: latest
+      command: echo "termino de instalar"
