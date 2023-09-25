@@ -7,15 +7,15 @@ pipeline {
             steps {
                 script {
                     def rutaLocal = input(
-                        message: 'Lab IaC:Ingrese la ruta del doc .pem',
+                        message: 'Lab IaC:Ingrese la ruta local del .pem',
                         parameters: [string(name: 'rutaLocal', defaultValue: '')]
                     )
                     def nombreContenedor = input(
-                        message: 'Lab IaC:Ingrese la ruta del doc .pem',
+                        message: 'Lab IaC:Ingrese el nombre del contenedor',
                         parameters: [string(name: 'nombreContenedor', defaultValue: '')]
                     )
                     def rutaContenedor = input(
-                        message: 'Lab IaC:Ingrese el ip de la instancia',
+                        message: 'Lab IaC:Ingrese la ruta del contenedor',
                         parameters: [string(name: 'rutaContenedor', defaultValue: '')]
                     )
                     sh "docker cp '${rutaLocal}' '${nombreContenedor}:${rutaContenedor}'"
@@ -26,8 +26,6 @@ pipeline {
         stage('Ejecutar SSH validar y permitir conexion a nuevo host') {
             steps {
                 script {
-                    sh "docker cp ${rutaLocal} ${nombreContenedor}:${rutaContenedor}"
-                    sh "chmod 400 Users/isaacbarrera/Downloads/terraform.pem"
                     def SSH_KEY = input(
                         message: 'Lab IaC:Ingrese la ruta del doc .pem',
                         parameters: [string(name: 'SSH_KEY', defaultValue: '')]
