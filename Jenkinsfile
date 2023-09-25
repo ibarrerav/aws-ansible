@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     stages {
-        
+        /*
         stage('Mover archivo .pem de local a Docker') {
             steps {
                 script {
@@ -38,7 +38,7 @@ pipeline {
                 }
             }
         }
-        
+        */
         stage('Instalar paquete en EC2') {
             steps {
                 script {
