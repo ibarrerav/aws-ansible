@@ -2,10 +2,31 @@ pipeline {
     agent any
 
     stages {
-        /*
+        
+        stage('Mover archivo .pem de local a Docker') {
+            steps {
+                script {
+                    def rutaLocal = input(
+                        message: 'Lab IaC:Ingrese la ruta del doc .pem',
+                        parameters: [string(name: 'rutaLocal', defaultValue: '')]
+                    )
+                    def nombreContenedor = input(
+                        message: 'Lab IaC:Ingrese la ruta del doc .pem',
+                        parameters: [string(name: 'nombreContenedor', defaultValue: '')]
+                    )
+                    def rutaContenedor = input(
+                        message: 'Lab IaC:Ingrese el ip de la instancia',
+                        parameters: [string(name: 'rutaContenedor', defaultValue: '')]
+                    )
+                    sh "docker cp '${rutaLocal}' '${nombreContenedor}:${rutaContenedor}'"
+                    sh "chmod 400 '${rutaContenedor}'/terraform.pem"
+                }
+            }
+        }
         stage('Ejecutar SSH validar y permitir conexion a nuevo host') {
             steps {
                 script {
+                    sh "docker cp ${rutaLocal} ${nombreContenedor}:${rutaContenedor}"
                     sh "chmod 400 Users/isaacbarrera/Downloads/terraform.pem"
                     def SSH_KEY = input(
                         message: 'Lab IaC:Ingrese la ruta del doc .pem',
@@ -15,11 +36,11 @@ pipeline {
                         message: 'Lab IaC:Ingrese el ip de la instancia',
                         parameters: [string(name: 'IP_ADDRESS', defaultValue: '')]
                     )
-                    sh "ssh -i '${SSH_KEY}' ec2-user@'${IP_ADDRESS}'"
+                    sh "ssh -i '${SSH_KEY}' 'ec2-user@${IP_ADDRESS}'"
                 }
             }
         }
-        */
+        
         stage('Instalar paquete en EC2') {
             steps {
                 script {
